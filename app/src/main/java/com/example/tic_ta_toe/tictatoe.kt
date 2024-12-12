@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -130,7 +131,9 @@ fun LobbyScreen(navController: NavController, model: GameModel) {//1
 
 
     Scaffold(
-        topBar = { TopAppBar(title =  { Text("TicTacToe - $playerName")}) }
+        topBar = { TopAppBar(title =  { Text("TicTacToe - $playerName")},
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Blue,
+                titleContentColor = Color.White)) }
     ) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
             items(players.entries.toList()) { (documentId, player) ->
@@ -204,13 +207,14 @@ fun GameScreen(navController: NavController, model: GameModel, gameId: String?) 
     if (gameId != null && games.containsKey(gameId)) {
         val game = games[gameId]!!
         Scaffold(
-            topBar = { TopAppBar(title =  { Text("TicTacToe - $playerName")}) }
+            topBar = { TopAppBar(title =  { Text("TicTacToe - $playerName")},
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Blue,
+                    titleContentColor = Color.White)) }
         ) { innerPadding ->
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(innerPadding).fillMaxSize()
-                .background(Color.Green)
+                modifier = Modifier.padding(innerPadding).fillMaxSize().background(Color.Green)
             ) {
                 when (game.gameState) {
                     "player1_won", "player2_won", "draw" -> {
@@ -244,7 +248,7 @@ fun GameScreen(navController: NavController, model: GameModel, gameId: String?) 
                         Text("Player 1: ${players[game.player1Id]!!.name}")
                         Text("Player 2: ${players[game.player2Id]!!.name}")
                         Text("State: ${game.gameState}")
-
+                        Text("GameId: ${gameId}")
                     }
                 }
 
@@ -259,7 +263,7 @@ fun GameScreen(navController: NavController, model: GameModel, gameId: String?) 
                         for (j in 0..< cols) {
                             Button(
                                 shape = RectangleShape,
-                                modifier = Modifier.size(100.dp).padding(2.dp),
+                                modifier = Modifier.size(120.dp).padding(2.dp),
                                 colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray),
                                 onClick = {
                                     model.checkGameState(gameId, i * cols + j)
@@ -269,7 +273,7 @@ fun GameScreen(navController: NavController, model: GameModel, gameId: String?) 
                                 if (game.gameBoard[i * cols + j] == 1) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.outline_cross_24),
-                                        tint = Color.Red,
+                                        tint = Color.Magenta,
                                         contentDescription = "X",
                                         modifier = Modifier.size(48.dp)
                                     )
@@ -297,3 +301,4 @@ fun GameScreen(navController: NavController, model: GameModel, gameId: String?) 
         navController.navigate("lobby")
     }
 }
+
