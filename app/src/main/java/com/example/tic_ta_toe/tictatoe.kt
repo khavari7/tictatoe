@@ -111,7 +111,7 @@ fun NewPlayerScreen(navController: NavController, model: GameModel) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LobbyScreen(navController: NavController, model: GameModel) {//1
+fun LobbyScreen(navController: NavController, model: GameModel) {
     val players by model.playerMap.asStateFlow().collectAsStateWithLifecycle()
     val games by model.gameMap.asStateFlow().collectAsStateWithLifecycle()
 
@@ -122,7 +122,7 @@ fun LobbyScreen(navController: NavController, model: GameModel) {//1
                 navController.navigate("game/${gameId}")
             }
         }
-    }//1
+    }
 
     var playerName = "Unknown?"
     players[model.localPlayerId.value]?.let {
@@ -248,7 +248,7 @@ fun GameScreen(navController: NavController, model: GameModel, gameId: String?) 
                         Text("Player 1: ${players[game.player1Id]!!.name}")
                         Text("Player 2: ${players[game.player2Id]!!.name}")
                         Text("State: ${game.gameState}")
-                        Text("GameId: ${gameId}")
+                       
                     }
                 }
 
