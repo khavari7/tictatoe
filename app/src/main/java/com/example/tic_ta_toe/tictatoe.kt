@@ -45,7 +45,7 @@ fun Tic_Ta_Toe() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewPlayerScreen(navController: NavController, model: GameModel) {//11
+fun NewPlayerScreen(navController: NavController, model: GameModel) {
     val sharedPreferences = LocalContext.current
         .getSharedPreferences("TicTacToePrefs", Context.MODE_PRIVATE)
 
@@ -54,7 +54,7 @@ fun NewPlayerScreen(navController: NavController, model: GameModel) {//11
         if (model.localPlayerId.value != null) {
             navController.navigate("lobby")
         }
-    }//1
+    }
 
     if (model.localPlayerId.value == null) {
         var playerName by remember { mutableStateOf("") }
